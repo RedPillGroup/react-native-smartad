@@ -12,6 +12,7 @@
 ```javascript
 import Smartad from 'react-native-smartad';
 
-// TODO: What to do with the module?
+// wip
+
 Smartad;
 ```
