@@ -1,0 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'Smartad' do
+
+  use_frameworks!
+  pod 'Smart-Display-SDK', '~> 7.4.0'
+
+end

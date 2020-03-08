@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/github_account/react-native-smartad"
   s.license      = "MIT"
   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.authors      = { "Your Name" => "yourname@email.com" }
+  s.authors      = { "bsisic" => "baptiste@redpillparis.com" }
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/github_account/react-native-smartad.git", :tag => "#{s.version}" }
 

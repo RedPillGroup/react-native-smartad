@@ -1,14 +1,17 @@
 #import "Smartad.h"
+#import <SASDisplayKit/SASDisplayKit.h>
 
+#define kSiteID 104808
+#define kBaseURL @"https://mobile.smartadserver.com"
 
 @implementation Smartad
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(sampleMethod:(NSString *)stringArgument numberParameter:(nonnull NSNumber *)numberArgument callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions)
 {
-    // TODO: Implement some actually useful functionality
-    callback(@[[NSString stringWithFormat: @"numberArgument: %@ stringArgument: %@", numberArgument, stringArgument]]);
+  [[SASConfiguration sharedInstance] configureWithSiteId:kSiteID baseURL:kBaseURL];);
 }
+
 
 @end
