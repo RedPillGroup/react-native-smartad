@@ -66,6 +66,7 @@ repositories {
         // Android JSC is installed from npm
         url "$rootDir/../node_modules/jsc-android/dist"
     }
+    maven { url 'https://packagecloud.io/smartadserver/android/maven2' }
     google()
     jcenter()
 }
@@ -73,6 +74,16 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
+
+    // Add Smart Display SDK
+	implementation 'com.smartadserver.android:smart-display-sdk:7.4.0@aar'
+	implementation 'com.smartadserver.android:smart-core-sdk:7.4.1@aar'
+
+	// Add dependencies required by Smart Display SDK
+	implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'
+	implementation 'com.google.android.gms:play-services-location:16.0.0'
+	implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+	implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
 }
 
 def configureReactNativePom(def pom) {
