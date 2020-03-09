@@ -25,7 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import SmartadModule from 'RNSmartAdRewardedVideo';
+import SmartadModule from './RNSmartAdRewardedVideo';
 
 const App: () => React$Node = () => {
   const [mess, setMess] = React.useState('...');
