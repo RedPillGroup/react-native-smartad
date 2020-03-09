@@ -66,10 +66,13 @@ repositories {
         // Android JSC is installed from npm
         url "$rootDir/../node_modules/jsc-android/dist"
     }
+    maven {
+        url 'https://packagecloud.io/smartadserver/android/maven2'
+    }
+
     google()
     jcenter()
 
-    maven { url 'https://packagecloud.io/smartadserver/android/maven2' }
 }
 
 dependencies {

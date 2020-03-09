@@ -1,6 +1,7 @@
 package com.reactlibrary;
 
 import android.util.Log;
+import android.support.annotation.Nullable;
 
 import com.smartadserver.android.library.model.SASAdPlacement;
 import com.smartadserver.android.library.rewarded.SASRewardedVideoManager;
@@ -8,6 +9,7 @@ import com.smartadserver.android.library.util.SASConfiguration;
 import com.smartadserver.android.library.model.SASAdStatus;
 import com.smartadserver.android.library.model.SASReward;
 
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -21,6 +23,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
     /****************************
      * Ad Constants
      ****************************/
+    private final static String TAG               = "RewardedVideoActivity";
     private final static int    SITE_ID           = 1234;
     private final static String PAGE_ID           = "1234";
     private final static int    FORMAT_ID         = 1234;
@@ -87,7 +90,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
 
             @Override
             public void onRewardedVideoAdShown(SASRewardedVideoManager rewardedVideoManager) {
-                Log.i(TAG, "RewardedVideo ad is shown.");
+                Log.i(RewardedVideoActivity.TAG, "RewardedVideo ad is shown.");
                 sendEvent("smartAdC", null);
             }
 
@@ -133,10 +136,8 @@ public class SmartadModule extends ReactContextBaseJavaModule {
         };
     }
 
-    @Override
     protected void onDestroy() {
         mRewardedVideoManager.onDestroy();
-        super.onDestroy();
     }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
