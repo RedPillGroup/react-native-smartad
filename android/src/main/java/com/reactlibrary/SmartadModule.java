@@ -1,25 +1,26 @@
 package com.reactlibrary;
 
 import android.util.Log;
-import androidx.annotation.Nullable;
-import android.view.ViewGroup;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
+import android.os.Handler;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import com.smartadserver.android.library.model.SASAdPlacement;
-import com.smartadserver.android.library.rewarded.SASRewardedVideoManager;
-import com.smartadserver.android.library.util.SASConfiguration;
-import com.smartadserver.android.library.model.SASAdStatus;
 import com.smartadserver.android.library.model.SASReward;
+import com.smartadserver.android.library.model.SASAdStatus;
 import com.smartadserver.android.library.model.SASAdElement;
+import com.smartadserver.android.library.model.SASAdPlacement;
+import com.smartadserver.android.library.util.SASConfiguration;
+import com.smartadserver.android.library.rewarded.SASRewardedVideoManager;
 
 import com.facebook.react.ReactActivity;
+import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 public class SmartadModule extends ReactContextBaseJavaModule {
@@ -29,20 +30,21 @@ public class SmartadModule extends ReactContextBaseJavaModule {
     /****************************
      * Ad Constants
      ****************************/
-    private final static String TAG               = "SmartadModule";
-    private final static int    SITE_ID           = 339683;
-    private final static String PAGE_ID           = "1188835";
-    private final static int    FORMAT_ID         = 87843;
-    private final static String TARGET            = null;
 
+     private final static String TAG               = "SmartadModule";
 
-    // /****************************
-    //  * Members declarations
-    //  ****************************/
+    /****************************
+     * Ad Variables
+     ****************************/
+
+     SASAdPlacement                                mRewaredVideoPlacement;
+     SASRewardedVideoManager                       mRewardedVideoManager;
+     SASRewardedVideoManager.RewardedVideoListener mRewardedVideoListener;
+ 
+    /****************************
+     * Members declarations
+     ****************************/
     
-    SASAdPlacement mRewaredVideoPlacement;
-    SASRewardedVideoManager mRewardedVideoManager;
-    SASRewardedVideoManager.RewardedVideoListener mRewardedVideoListener;
 
     public SmartadModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -55,15 +57,16 @@ public class SmartadModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initializeRewardedVideo() {
-        // DEV: Enable output to log.
+    public void initializeRewardedVideo(final @NonNull int SITE_ID, final @NonNull String PAGE_ID, final @NonNull int FORMAT_ID, final @Nullable String TARGET) {
+        // Enables output to log.
         SASConfiguration.getSharedInstance().setLoggingEnabled(true);
 
+        // Initializes the SmartAdServer on main thread
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                SASConfiguration.getSharedInstance().configure(reactContext, SmartadModule.SITE_ID, "https://mobile.smartadserver.com");
-                mRewaredVideoPlacement = new SASAdPlacement(SmartadModule.SITE_ID, SmartadModule.PAGE_ID, SmartadModule.FORMAT_ID, SmartadModule.TARGET);
+                SASConfiguration.getSharedInstance().configure(reactContext, SITE_ID, "https://mobile.smartadserver.com");
+                mRewaredVideoPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
                 mRewardedVideoManager = new SASRewardedVideoManager(reactContext, mRewaredVideoPlacement);
                 initRewardVideoListener();
                 mRewardedVideoManager.setRewardedVideoListener(mRewardedVideoListener);
