@@ -9,23 +9,12 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
   Text,
   StatusBar,
   TouchableOpacity
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import SmartadModule from 'react-native-smartad';
+import SmartadModule from './RNSmartAdRewardedVideo';
 
 const App: () => React$Node = () => {
   const [mess, setMess] = React.useState('...');
@@ -91,7 +80,7 @@ const App: () => React$Node = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <TouchableOpacity onPress={async () => { await SmartadModule.initializeRewardedVideo();}}>
+        <TouchableOpacity onPress={async () => { await SmartadModule.initializeRewardedVideo(339683, "1188835", 87843, null);}}>
           <Text>
             Initialize !
           </Text>

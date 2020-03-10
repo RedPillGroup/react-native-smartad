@@ -61,7 +61,7 @@ const removeAllListeners = () => {
 
 module.exports = {
   ...RNSmartAdRewardedVideo,
-  initializeRewardedVideo: () => RNSmartAdRewardedVideo.initializeRewardedVideo(),
+  initializeRewardedVideo: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeRewardedVideo(siteId, pageId, formatId, target),
   showRewardedVideo: () => RNSmartAdRewardedVideo.showRewardedVideo(),
   loadRewardedVideoAd: () => RNSmartAdRewardedVideo.loadRewardedVideoAd(),
   addEventListener,
