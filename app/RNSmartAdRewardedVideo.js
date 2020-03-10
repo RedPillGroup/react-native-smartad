@@ -5,35 +5,31 @@ const SmartAdRewardedVideoEventEmitter = new NativeEventEmitter(RNSmartAdRewarde
 
 const eventHandlers = {
   smartAdRewardedVideoNotReady: new Map(),
-  smartAdA: new Map(),
-  smartAdB: new Map(),
-  smartAdC: new Map(),
-  smartAdD: new Map(),
-  smartAdE: new Map(),
-  smartAdF: new Map(),
-  smartAdG: new Map(),
-  smartAdH: new Map(),
-  smartAdI: new Map(),
-  smartAdJ: new Map(),
-  smartAdK: new Map(),
-  smartAdL: new Map(),
+  smartAdRewardedVideoAdLoaded: new Map(),
+  smartAdRewardedVideoAdFailedToLoad: new Map(),
+  smartAdRewardedVideoAdShown: new Map(),
+  smartAdVideoAdFailedToShow: new Map(),
+  smartAdRewardedVideoAdClosed: new Map(),
+  smartAdRewardReceived: new Map(),
+  smartAdRewardNotReceived: new Map(),
+  smartAdRewardedVideoAdClicked: new Map(),
+  smartAdRewardedVideoEvent: new Map(),
+  smartAdRewardedVideoEndCardDisplayed: new Map(),
 }
 
 const addEventListener = (type, handler) => {
   switch (type) {
     case 'smartAdRewardedVideoNotReady':
-    case 'smartAdA':
-    case 'smartAdB':
-    case 'smartAdC':
-    case 'smartAdD':
-    case 'smartAdE':
-    case 'smartAdF':
-    case 'smartAdG':
-    case 'smartAdH':
-    case 'smartAdI':
-    case 'smartAdJ':
-    case 'smartAdK':
-    case 'smartAdL':
+    case 'smartAdRewardedVideoAdLoaded':
+    case 'smartAdRewardedVideoAdFailedToLoad':
+    case 'smartAdRewardedVideoAdShown':
+    case 'smartAdVideoAdFailedToShow':
+    case 'smartAdRewardedVideoAdClosed':
+    case 'smartAdRewardReceived':
+    case 'smartAdRewardNotReceived':
+    case 'smartAdRewardedVideoAdClicked':
+    case 'smartAdRewardedVideoEvent':
+    case 'smartAdRewardedVideoEndCardDisplayed':
       eventHandlers[type].set(handler, SmartAdRewardedVideoEventEmitter.addListener(type, handler));
       break;
     default:
@@ -51,24 +47,23 @@ const removeEventListener = (type, handler) => {
 
 const removeAllListeners = () => {
   SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoNotReady');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdA');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdB');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdC');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdD');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdE');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdF');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdG');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdH');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdI');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdJ');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdK');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdL');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdLoaded');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdFailedToLoad');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdShown');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdVideoAdFailedToShow');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdClosed');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardReceived');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardNotReceived');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdClicked');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEvent');
+  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEndCardDisplayed');
 }
 
 module.exports = {
   ...RNSmartAdRewardedVideo,
   initializeRewardedVideo: () => RNSmartAdRewardedVideo.initializeRewardedVideo(),
   showRewardedVideo: () => RNSmartAdRewardedVideo.showRewardedVideo(),
+  loadRewardedVideoAd: () => RNSmartAdRewardedVideo.loadRewardedVideoAd(),
   addEventListener,
   removeEventListener,
   removeAllListeners
