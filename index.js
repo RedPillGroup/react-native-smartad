@@ -59,11 +59,29 @@ const removeAllListeners = () => {
   SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEndCardDisplayed');
 }
 
+const loadAndShowRewardedVideo = () => {
+  console.log('here');
+  const showAndDelete = () => {
+    RNSmartAdRewardedVideo.showRewardedVideo();
+    removeEventListener('smartAdRewardedVideoAdLoaded', showAndDelete);
+    removeEventListener('smartAdRewardedVideoAdFailedToLoad', errorDelete);
+  }
+  const errorDelete = () => {
+    removeEventListener('smartAdRewardedVideoAdLoaded', showAndDelete);
+    removeEventListener('smartAdRewardedVideoAdFailedToLoad', errorDelete);
+  }
+
+  addEventListener('smartAdRewardedVideoAdLoaded', showAndDelete);
+  addEventListener('smartAdRewardedVideoAdFailedToLoad', errorDelete);
+  RNSmartAdRewardedVideo.loadRewardedVideoAd();
+}
+
 module.exports = {
   ...RNSmartAdRewardedVideo,
   initializeRewardedVideo: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeRewardedVideo(siteId, pageId, formatId, target),
   showRewardedVideo: () => RNSmartAdRewardedVideo.showRewardedVideo(),
-  loadRewardedVideoAd: () => RNSmartAdRewardedVideo.loadRewardedVideoAd(),
+  loadRewardedVideo: () => RNSmartAdRewardedVideo.loadRewardedVideoAd(),
+  loadAndShowRewardedVideo,
   addEventListener,
   removeEventListener,
   removeAllListeners

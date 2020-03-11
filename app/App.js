@@ -20,6 +20,7 @@ const App: () => React$Node = () => {
   const [mess, setMess] = React.useState('...');
 
   React.useEffect(() => {
+    SmartadModule.removeAllListeners();
     SmartadModule.addEventListener('smartAdRewardedVideoNotReady',
       () => {
         console.log('Got something from events: "smartAdRewardedVideoNotReady"');
@@ -51,8 +52,9 @@ const App: () => React$Node = () => {
       }
     );
     SmartadModule.addEventListener('smartAdRewardReceived',
-      () => {
+      (params) => {
         console.log('Got something from events: "smartAdRewardReceived"');
+        console.log(`User should be rewarded: ${params['amount']} ${params['currency']}`);
       }
     );
     SmartadModule.addEventListener('smartAdRewardNotReceived',
@@ -85,9 +87,14 @@ const App: () => React$Node = () => {
             Initialize !
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={async () => { await SmartadModule.loadRewardedVideoAd();}}>
+        <TouchableOpacity onPress={async () => { await SmartadModule.loadRewardedVideo();}}>
           <Text>
             Load video
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={async () => { await SmartadModule.loadAndShowRewardedVideo();}}>
+          <Text>
+            Load and Show video
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => SmartadModule.showRewardedVideo()}>

@@ -61,12 +61,16 @@ RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSit
 
 RCT_EXPORT_METHOD(loadRewardedVideoAd)
 {
-    [self.rewardedVideoManager load];
+    if (self.rewardedVideoManager != nil) {
+        [self.rewardedVideoManager load];
+    } else {
+        [self sendEventWithName:kSmartAdRewardedVideoAdFailedToLoad body:nil];
+    }
 }
 
 RCT_EXPORT_METHOD(showRewardedVideo)
 {
-    if (self.rewardedVideoManager.adStatus == SASAdStatusReady) {
+    if (self.rewardedVideoManager != nil && self.rewardedVideoManager.adStatus == SASAdStatusReady) {
         [self.rewardedVideoManager showFromViewController:self];
     } else if (self.rewardedVideoManager.adStatus == SASAdStatusExpired) {
         NSLog(@"RewardedVideo has expired and cannot be shown anymore.");
@@ -103,9 +107,10 @@ RCT_EXPORT_METHOD(showRewardedVideo)
 - (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didCollectReward: (SASReward *)reward {
     if (reward != nil) {
         NSLog(@"RewardedVideo did collect reward for currency %@ with amount %ld", reward.currency, (long)[reward.amount integerValue]);
-        [self sendEventWithName:kSmartAdRewardReceived body:nil];
+        [self sendEventWithName:kSmartAdRewardReceived body:@{@"amount":reward.amount @"currency":reward.currency}];
+    } else {
+        [self sendEventWithName:kSmartAdRewardNotReceived body:nil];
     }
-    [self sendEventWithName:kSmartAdRewardNotReceived body:nil];
 }
 
 - (void)rewardedVideoManager:(SASRewardedVideoManager *)manager shouldHandleURL: (NSURL *)URL {

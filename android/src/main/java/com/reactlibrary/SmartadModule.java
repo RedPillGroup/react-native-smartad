@@ -17,6 +17,7 @@ import com.smartadserver.android.library.rewarded.SASRewardedVideoManager;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -76,12 +77,16 @@ public class SmartadModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void loadRewardedVideoAd() {
-        mRewardedVideoManager.loadRewardedVideo();
+        if (mRewardedVideoManager != null) {
+            mRewardedVideoManager.loadRewardedVideo();
+        } else {
+            sendEvent("smartAdRewardedVideoAdFailedToLoad", null);
+        }
     }
 
     @ReactMethod
     public void showRewardedVideo() {
-        if (mRewardedVideoManager.getAdStatus() == SASAdStatus.READY) {
+        if (mRewardedVideoManager != null && mRewardedVideoManager.getAdStatus() == SASAdStatus.READY) {
             mRewardedVideoManager.showRewardedVideo();
         } else {
             Log.e(SmartadModule.TAG, "RewardedVideo is not ready for the current placement.");
@@ -126,9 +131,13 @@ public class SmartadModule extends ReactContextBaseJavaModule {
                 if (reward != null) {
                     Log.i(SmartadModule.TAG, "RewardedVideo collected a reward.");
                     Log.i(SmartadModule.TAG, "User should be rewarded with: " + reward.getAmount() + " " + reward.getCurrency() + ".");
-                    sendEvent("smartAdRewardReceived", null);
+                    WritableMap params = Arguments.createMap();
+                    params.putDouble("amount", reward.getAmount());
+                    params.putString("currency", reward.getCurrency());
+                    sendEvent("smartAdRewardReceived", params);
+                } else {
+                    sendEvent("smartAdRewardNotReceived", null);
                 }
-                sendEvent("smartAdRewardNotReceived", null);
             }
 
             @Override
