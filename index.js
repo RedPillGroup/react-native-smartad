@@ -60,7 +60,6 @@ const removeAllListeners = () => {
 }
 
 const loadAndShowRewardedVideo = () => {
-  console.log('here');
   const showAndDelete = () => {
     RNSmartAdRewardedVideo.showRewardedVideo();
     removeEventListener('smartAdRewardedVideoAdLoaded', showAndDelete);

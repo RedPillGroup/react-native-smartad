@@ -38,7 +38,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
      * Ad Variables
      ****************************/
 
-     SASAdPlacement                                mRewaredVideoPlacement;
+     SASAdPlacement                                mRewardedVideoPlacement;
      SASRewardedVideoManager                       mRewardedVideoManager;
      SASRewardedVideoManager.RewardedVideoListener mRewardedVideoListener;
  
@@ -67,8 +67,8 @@ public class SmartadModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 SASConfiguration.getSharedInstance().configure(reactContext, SITE_ID, "https://mobile.smartadserver.com");
-                mRewaredVideoPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
-                mRewardedVideoManager = new SASRewardedVideoManager(reactContext, mRewaredVideoPlacement);
+                mRewardedVideoPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
+                mRewardedVideoManager = new SASRewardedVideoManager(reactContext, mRewardedVideoPlacement);
                 initRewardVideoListener();
                 mRewardedVideoManager.setRewardedVideoListener(mRewardedVideoListener);
             }
