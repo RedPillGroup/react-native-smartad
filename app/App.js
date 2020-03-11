@@ -14,7 +14,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import SmartadModule from './RNSmartAdRewardedVideo';
+import SmartadModule from 'react-native-smartad';
 
 const App: () => React$Node = () => {
   const [mess, setMess] = React.useState('...');
