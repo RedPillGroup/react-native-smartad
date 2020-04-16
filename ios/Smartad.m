@@ -21,7 +21,7 @@ NSString *const kSmartAdRewardedVideoEndCardDisplayed = @"smartAdRewardedVideoEn
 @end
 
 @implementation Smartad {
-    RCTRespconseSenderBlock _requestRewardedVideoCallback;
+    RCTResponseSenderBlock _requestRewardedVideoCallback;
 }
 
 - (dispatch_queue_t)methodQueue
@@ -33,23 +33,23 @@ RCT_EXPORT_MODULE()
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[
-        kSmartAdRewardedVideoNotReady
-        kSmartAdRewardedVideoAdLoaded
-        kSmartAdRewardedVideoAdFailedToLoad
-        kSmartAdRewardedVideoAdShown
-        kSmartAdVideoAdFailedToShow
-        kSmartAdRewardedVideoAdClosed
-        kSmartAdRewardReceived
-        kSmartAdRewardNotReceived
-        kSmartAdRewardedVideoAdClicked
-        kSmartAdRewardedVideoEvent
-        kSmartAdRewardedVideoEndCardDisplayed
-    ];
+        @"kSmartAdRewardedVideoNotReady"
+        @"kSmartAdRewardedVideoAdLoaded"
+        @"kSmartAdRewardedVideoAdFailedToLoad"
+        @"kSmartAdRewardedVideoAdShown"
+        @"kSmartAdVideoAdFailedToShow"
+        @"kSmartAdRewardedVideoAdClosed"
+        @"kSmartAdRewardReceived"
+        @"kSmartAdRewardNotReceived"
+        @"kSmartAdRewardedVideoAdClicked"
+        @"kSmartAdRewardedVideoEvent"
+        @"kSmartAdRewardedVideoEndCardDisplayed" ];
 }
 
 RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSString *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
 {
-    [[SASConfiguration sharedInstance] configureWithSiteId:kRewardedVideoSiteID baseURL:kBaseURL];);
+    [[SASConfiguration sharedInstance] configureWithSiteId:kRewardedVideoSiteID baseURL:kBaseURL];
+    
     SASAdPlacement *placement = [SASAdPlacement
         adPlacementWithSiteId:kRewardedVideoSiteID
                        pageId:kRewardedVideoPageID
@@ -107,7 +107,8 @@ RCT_EXPORT_METHOD(showRewardedVideo)
 - (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didCollectReward: (SASReward *)reward {
     if (reward != nil) {
         NSLog(@"RewardedVideo did collect reward for currency %@ with amount %ld", reward.currency, (long)[reward.amount integerValue]);
-        [self sendEventWithName:kSmartAdRewardReceived body:@{@"amount":reward.amount @"currency":reward.currency}];
+        [self sendEventWithName:kSmartAdRewardReceived body:@{@"amount":reward.amount,  @"currency":reward.currency}];
+        
     } else {
         [self sendEventWithName:kSmartAdRewardNotReceived body:nil];
     }
