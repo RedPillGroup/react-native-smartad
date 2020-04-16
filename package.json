@@ -1,7 +1,7 @@
 {
   "name": "react-native-smartad",
   "title": "React Native Smartad",
-  "version": "1.3.4",
+  "version": "1.3.7",
   "description": "Smart Ad Server SDK React Native bridge",
   "main": "index.js",
   "scripts": {
