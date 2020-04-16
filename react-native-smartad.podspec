@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
+  s.dependency "Smart-Display-SDK"
   # ...
   # s.dependency "..."
 end
