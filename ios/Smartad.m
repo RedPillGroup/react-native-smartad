@@ -11,6 +11,8 @@ NSString *const kSmartAdRewardNotReceived = @"smartAdRewardNotReceived";
 NSString *const kSmartAdRewardedVideoAdClicked = @"smartAdRewardedVideoAdClicked";
 NSString *const kSmartAdRewardedVideoEvent = @"smartAdRewardedVideoEvent";
 NSString *const kSmartAdRewardedVideoEndCardDisplayed = @"smartAdRewardedVideoEndCardDisplayed";
+NSString *const kSmartAdVignette = @"kSmartAdVignette";
+NSString *const kSmartAdCustomAdvertiser = @"kSmartAdCustomAdvertiser";
 
 #define kBaseURL @"https://mobile.smartadserver.com"
 
@@ -43,7 +45,9 @@ RCT_EXPORT_MODULE()
         @"kSmartAdRewardNotReceived"
         @"kSmartAdRewardedVideoAdClicked"
         @"kSmartAdRewardedVideoEvent"
-        @"kSmartAdRewardedVideoEndCardDisplayed" ];
+        @"kSmartAdRewardedVideoEndCardDisplayed"
+        @"kSmartAdVignette"
+        @"kSmartAdCustomAdvertiser" ];
 }
 
 RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSString *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
@@ -126,6 +130,24 @@ RCT_EXPORT_METHOD(showRewardedVideo)
 
 - (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didLoadEndCardFromViewController: (UIViewController *)controller {
     [self sendEventWithName:kSmartAdRewardedVideoEndCardDisplayed body:nil];
+}
+
+- (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didLoadAd:(SASAd *)ad {
+    NSLog(@"RewardedVideo has been loaded and is ready to be shown");
+    // Enable show button
+    self.showRewardedVideoAdButton.enabled = YES;
+
+    // Find Ad vignette
+    SASNativeVideoAd *castedAd = (SASNativeVideoAd *)ad;
+    if (castedAd.posterImageUrl) {
+        NSLog(@"Vignette is found at: %@", [castedAd.posterImageUrl absoluteString]);
+        [self sendEventWithName:kSmartAdVignette body:@{@"url":castedAd.posterImageUrl}];
+    }
+
+    // Find Ad Custom advertiser
+    NSDictionary *extraParameters = ad.extraParameters;
+    NSLog(@"** extraparam = %@", [extraParameters description]);
+    [self sendEventWithName:kSmartAdCustomAdvertiser body:@{@"extraparams":extraParameters}];
 }
 
 @end
