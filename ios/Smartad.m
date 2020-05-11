@@ -84,6 +84,14 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     }
 }
 
+- (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didLoadAd:(SASAd *)ad {
+    NSLog(@"RewardedVideo has been loaded and is ready to be shown");
+    [self sendEventWithName:kSmartAdRewardedVideoAdLoaded body:nil];
+
+    // Enable show button
+    self.showRewardedVideoAdButton.enabled = YES;
+}
+
 - (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didFailToLoadWithError: (NSError *)error {
     NSLog(@"RewardedVideo did fail to load with error: %@", [error localizedDescription]);
     [self sendEventWithName:kSmartAdRewardedVideoAdFailedToLoad body:nil];
@@ -126,24 +134,25 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     [self sendEventWithName:kSmartAdRewardedVideoEndCardDisplayed body:nil];
 }
 
-- (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didLoadAd:(SASAd *)ad {
-    NSLog(@"RewardedVideo has been loaded and is ready to be shown");
-    [self sendEventWithName:kSmartAdRewardedVideoAdLoaded body:nil];
+// - (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didLoadAd:(SASAd *)ad {
+//     NSLog(@"RewardedVideo has been loaded and is ready to be shown");
 
-    // Enable show button
-    self.showRewardedVideoAdButton.enabled = YES;
+//     // Enable show button
+//     self.showRewardedVideoAdButton.enabled = YES;
 
-    // Find Ad vignette
-    SASNativeVideoAd *castedAd = (SASNativeVideoAd *)ad;
-    if (castedAd.posterImageUrl) {
-        NSLog(@"Vignette is found at: %@", [castedAd.posterImageUrl absoluteString]);
-        [self sendEventWithName:kSmartAdVignette body:@{@"url":castedAd.posterImageUrl}];
-    }
+//     // Find Ad vignette
+//     SASNativeVideoAd *castedAd = (SASNativeVideoAd *)ad;
+//     if (castedAd.posterImageUrl) {
+//         NSLog(@"Vignette is found at: %@", [castedAd.posterImageUrl absoluteString]);
+//         [self sendEventWithName:kSmartAdVignette body:@{@"url":castedAd.posterImageUrl}];
+//     }
 
-    // Find Ad Custom advertiser
-    NSDictionary *extraParameters = ad.extraParameters;
-    NSLog(@"** extraparam = %@", [extraParameters description]);
-    [self sendEventWithName:kSmartAdCustomAdvertiser body:@{@"extraparams":extraParameters}];
-}
+//     // Find Ad Custom advertiser
+//     NSDictionary *extraParameters = ad.extraParameters;
+//     NSLog(@"** extraparam = %@", [extraParameters description]);
+//     [self sendEventWithName:kSmartAdCustomAdvertiser body:@{@"extraparams":extraParameters}];
+
+//     [self sendEventWithName:kSmartAdRewardedVideoAdLoaded body:nil];
+// }
 
 @end
