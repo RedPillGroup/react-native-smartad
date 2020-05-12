@@ -35,19 +35,19 @@ RCT_EXPORT_MODULE()
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[
-        @"kSmartAdRewardedVideoNotReady"
-        @"kSmartAdRewardedVideoAdLoaded"
-        @"kSmartAdRewardedVideoAdFailedToLoad"
-        @"kSmartAdRewardedVideoAdShown"
-        @"kSmartAdVideoAdFailedToShow"
-        @"kSmartAdRewardedVideoAdClosed"
-        @"kSmartAdRewardReceived"
-        @"kSmartAdRewardNotReceived"
-        @"kSmartAdRewardedVideoAdClicked"
-        @"kSmartAdRewardedVideoEvent"
-        @"kSmartAdRewardedVideoEndCardDisplayed"
-        @"kSmartAdVignette"
-        @"kSmartAdCustomAdvertiser" ];
+        kSmartAdRewardedVideoNotReady,
+        kSmartAdRewardedVideoAdLoaded,
+        kSmartAdRewardedVideoAdFailedToLoad,
+        kSmartAdRewardedVideoAdShown,
+        kSmartAdVideoAdFailedToShow,
+        kSmartAdRewardedVideoAdClosed,
+        kSmartAdRewardReceived,
+        kSmartAdRewardNotReceived,
+        kSmartAdRewardedVideoAdClicked,
+        kSmartAdRewardedVideoEvent,
+        kSmartAdRewardedVideoEndCardDisplayed,
+        kSmartAdVignette,
+        kSmartAdCustomAdvertiser ];
 }
 
 RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSString *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
