@@ -6,11 +6,7 @@ Supports Rewarded Video ad unit.
 
 ## Getting started
 
-`$ npm install react-native-smartad --save`
-
-### Mostly automatic installation
-
-`$ react-native link react-native-smartad`
+`$ yarn add react-native-smartad`
 
 ## Usage
 ```javascript
