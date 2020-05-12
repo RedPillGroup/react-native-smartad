@@ -16,7 +16,9 @@ Supports Rewarded Video ad unit.
 ```javascript
 import Smartad from 'react-native-smartad';
 
-// wip
+await Smartad.initializeRewardedVideo(000000, "0000000", 00000, null)
+await Smartad.loadRewardedVideo()
+await Smartad.loadAndShowRewardedVideo()
 
 Smartad;
 ```
