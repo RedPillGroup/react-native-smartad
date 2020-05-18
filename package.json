@@ -1,7 +1,7 @@
 {
   "name": "react-native-smartad",
   "title": "React Native Smartad",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "Smart Ad Server SDK React Native bridge",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RedPillGroup/react-native-smartad.git",
-    "baseUrl": "https://github.com/RedPillGroup/react-native-smartad"
+    "url": "git+https://github.com/github_account/react-native-smartad.git",
+    "baseUrl": "https://github.com/github_account/react-native-smartad"
   },
   "keywords": [
     "react-native"
