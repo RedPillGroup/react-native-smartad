@@ -1,4 +1,5 @@
 #import "Smartad.h"
+#import "RCTUtils.h"
 
 NSString *const kSmartAdRewardedVideoNotReady = @"smartAdRewardedVideoNotReady";
 NSString *const kSmartAdRewardedVideoAdLoaded = @"smartAdRewardedVideoAdLoaded";
@@ -50,7 +51,7 @@ RCT_EXPORT_MODULE()
         kSmartAdCustomAdvertiser ];
 }
 
-RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSString *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
+RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSInteger *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
 {
     [[SASConfiguration sharedInstance] configureWithSiteId:kRewardedVideoSiteID baseURL:kBaseURL];
     
@@ -75,7 +76,7 @@ RCT_EXPORT_METHOD(loadRewardedVideoAd)
 RCT_EXPORT_METHOD(showRewardedVideo)
 {
     if (self.rewardedVideoManager != nil && self.rewardedVideoManager.adStatus == SASAdStatusReady) {
-        [self.rewardedVideoManager showFromViewController:self];
+        [self.rewardedVideoManager showFromViewController:RCTPresentedViewController()];
     } else if (self.rewardedVideoManager.adStatus == SASAdStatusExpired) {
         NSLog(@"RewardedVideo has expired and cannot be shown anymore.");
         [self sendEventWithName:kSmartAdRewardedVideoNotReady body:nil];
