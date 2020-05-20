@@ -1,5 +1,8 @@
 package com.reactlibrary;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.util.Log;
 import android.os.Bundle;
 import android.os.Looper;
@@ -12,6 +15,7 @@ import com.smartadserver.android.library.model.SASReward;
 import com.smartadserver.android.library.model.SASAdStatus;
 import com.smartadserver.android.library.model.SASAdElement;
 import com.smartadserver.android.library.model.SASAdPlacement;
+import com.smartadserver.android.library.model.SASNativeVideoAdElement;
 import com.smartadserver.android.library.util.SASConfiguration;
 import com.smartadserver.android.library.rewarded.SASRewardedVideoManager;
 
@@ -99,6 +103,20 @@ public class SmartadModule extends ReactContextBaseJavaModule {
             @Override
             public void onRewardedVideoAdLoaded(SASRewardedVideoManager rewardedVideoManager, SASAdElement adElement) {
                 Log.i(SmartadModule.TAG, "RewardedVideo Ad loading completed.");
+
+                SASNativeVideoAdElement castedAd = (SASNativeVideoAdElement)adElement;
+                if (!castedAd.getPosterImageUrl().isEmpty()) {
+                    WritableMap params = Arguments.createMap();
+                    params.putString("url", castedAd.getPosterImageUrl());
+                    sendEvent("kSmartAdVignette", params);
+                }
+                HashMap<String, Object> extraParameters = adElement.getExtraParameters();
+                WritableMap extraParams = Arguments.createMap();
+                for (Map.Entry<String, Object> entry : extraParameters.entrySet()) {
+                    extraParams.putString(entry.getKey(), entry.getValue().toString());
+                }
+
+                sendEvent("kSmartAdCustomAdvertiser", extraParams);
                 sendEvent("smartAdRewardedVideoAdLoaded", null);
             }
 
