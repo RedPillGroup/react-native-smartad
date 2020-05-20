@@ -107,16 +107,18 @@ public class SmartadModule extends ReactContextBaseJavaModule {
                 SASNativeVideoAdElement castedAd = (SASNativeVideoAdElement)adElement;
                 if (!castedAd.getPosterImageUrl().isEmpty()) {
                     WritableMap params = Arguments.createMap();
+
+                    HashMap<String, Object> extraParameters = adElement.getExtraParameters();
+                    WritableMap extraParams = Arguments.createMap();
+                    for (Map.Entry<String, Object> entry : extraParameters.entrySet()) {
+                        extraParams.putString(entry.getKey(), entry.getValue().toString());
+                    }
+
                     params.putString("url", castedAd.getPosterImageUrl());
+                    params.putMap("extraparams", extraParams);
+
                     sendEvent("kSmartAdVignette", params);
                 }
-                HashMap<String, Object> extraParameters = adElement.getExtraParameters();
-                WritableMap extraParams = Arguments.createMap();
-                for (Map.Entry<String, Object> entry : extraParameters.entrySet()) {
-                    extraParams.putString(entry.getKey(), entry.getValue().toString());
-                }
-
-                sendEvent("kSmartAdCustomAdvertiser", extraParams);
                 sendEvent("smartAdRewardedVideoAdLoaded", null);
             }
 
