@@ -146,16 +146,12 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     NSLog(@"RewardedVideo has been loaded and is ready to be shown");
 
     // Find Ad vignette
-     SASNativeVideoAd *castedAd = (SASNativeVideoAd *)ad;
-     if (castedAd.posterImageUrl) {
+    SASNativeVideoAd *castedAd = (SASNativeVideoAd *)ad;
+    if (castedAd.posterImageUrl) {
+        NSDictionary *extraParameters = ad.extraParameters;
         NSLog(@"Vignette is found at: %@", [castedAd.posterImageUrl absoluteString]);
-        [self sendEventWithName:kSmartAdVignette body:@{@"url":[castedAd.posterImageUrl absoluteString]}];
-     }
-
-     // Find Ad Custom advertiser
-     NSDictionary *extraParameters = ad.extraParameters;
-     NSLog(@"** extraparam = %@", [extraParameters description]);
-     [self sendEventWithName:kSmartAdCustomAdvertiser body:@{@"extraparams":extraParameters}];
+        [self sendEventWithName:kSmartAdVignette body:@{@"url":[castedAd.posterImageUrl absoluteString], @"extraparams":extraParameters}];
+    }
 
     [self sendEventWithName:kSmartAdRewardedVideoAdLoaded body:nil];
 }
