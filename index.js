@@ -16,7 +16,6 @@ const eventHandlers = {
   smartAdRewardedVideoEvent: new Map(),
   smartAdRewardedVideoEndCardDisplayed: new Map(),
   kSmartAdVignette:new Map(),
-  kSmartAdCustomAdvertiser:new Map(),
 }
 
 const addEventListener = (type, handler) => {
@@ -32,7 +31,6 @@ const addEventListener = (type, handler) => {
     case 'smartAdRewardedVideoAdClicked':
     case 'smartAdRewardedVideoEvent':
     case 'kSmartAdVignette':
-    case 'kSmartAdCustomAdvertiser':
     case 'smartAdRewardedVideoEndCardDisplayed':
       eventHandlers[type].set(handler, SmartAdRewardedVideoEventEmitter.addListener(type, handler));
       break;
@@ -61,7 +59,6 @@ const removeAllListeners = () => {
   SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdClicked');
   SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEvent');
   SmartAdRewardedVideoEventEmitter.removeAllListeners('kSmartAdVignette');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('kSmartAdCustomAdvertiser');
   SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEndCardDisplayed');
 }
 
