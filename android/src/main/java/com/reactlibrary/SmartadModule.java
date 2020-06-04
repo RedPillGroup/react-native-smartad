@@ -125,7 +125,9 @@ public class SmartadModule extends ReactContextBaseJavaModule {
             @Override
             public void onRewardedVideoAdFailedToLoad(SASRewardedVideoManager rewardedVideoManager, Exception exception) {
                 Log.i(SmartadModule.TAG, "RewardedVideo Ad loading failed with exception: " + exception.getLocalizedMessage());
-                sendEvent("smartAdRewardedVideoAdFailedToLoad", null);
+                WritableMap params = Arguments.createMap();
+                params.putString("message", exception.getLocalizedMessage());
+                sendEvent("smartAdRewardedVideoAdFailedToLoad", params);
             }
 
             @Override
@@ -180,6 +182,12 @@ public class SmartadModule extends ReactContextBaseJavaModule {
         };
     }
 
+    @ReactMethod
+    protected void reset() {
+        mRewardedVideoManager.reset();
+    }
+
+    @ReactMethod
     protected void onDestroy() {
         mRewardedVideoManager.onDestroy();
     }

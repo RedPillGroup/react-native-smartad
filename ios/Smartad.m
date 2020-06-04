@@ -87,6 +87,13 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     }
 }
 
+RCT_EXPORT_METHOD(onDestroy)
+{}
+
+RCT_EXPORT_METHOD(reset)
+{}
+
+
 - (void)rewardedVideoManager:(SASRewardedVideoManager *)manager didFailToLoadWithError: (NSError *)error {
     NSLog(@"RewardedVideo did fail to load with error: %@", [error localizedDescription]);
     [self sendEventWithName:kSmartAdRewardedVideoAdFailedToLoad body:nil];
