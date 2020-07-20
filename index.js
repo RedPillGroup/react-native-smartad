@@ -82,7 +82,7 @@ module.exports = {
   ...RNSmartAdRewardedVideo,
   initializeRewardedVideo: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeRewardedVideo(siteId, pageId, formatId, target),
   showRewardedVideo: () => RNSmartAdRewardedVideo.showRewardedVideo(),
-  loadRewardedVideo: () => RNSmartAdRewardedVideo.loadRewardedVideoAd(),
+  loadRewardedVideo: (securedTransactionToken=null) => RNSmartAdRewardedVideo.loadRewardedVideoAd(securedTransactionToken),
   loadAndShowRewardedVideo,
   addEventListener,
   removeEventListener,
