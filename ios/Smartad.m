@@ -64,10 +64,10 @@ RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSit
     self.rewardedVideoManager = [[SASRewardedVideoManager alloc] initWithPlacement:placement delegate:self];
 }
 
-RCT_EXPORT_METHOD(loadRewardedVideoAd)
+RCT_EXPORT_METHOD(loadRewardedVideoAd:(nullable NSString *)securedTransactionToken)
 {
     if (self.rewardedVideoManager != nil) {
-        [self.rewardedVideoManager load];
+        [self.rewardedVideoManager loadWithSecuredTransactionToken:securedTransactionToken];
     } else {
         [self sendEventWithName:kSmartAdRewardedVideoAdFailedToLoad body:nil];
     }
@@ -118,7 +118,7 @@ RCT_EXPORT_METHOD(reset)
     NSLog(@"RewardedVideo did collect reward");
     if (reward != nil) {
         NSLog(@"RewardedVideo did collect reward for currency %@ with amount %ld", reward.currency, (long)[reward.amount integerValue]);
-        [self sendEventWithName:kSmartAdRewardReceived body:@{@"amount":reward.amount,  @"currency":reward.currency}];
+        [self sendEventWithName:kSmartAdRewardReceived body:@{@"amount":reward.amount,  @"currency":reward.currency, @"securedToken":reward.securedTransactionToken}];
     } else {
         [self sendEventWithName:kSmartAdRewardNotReceived body:nil];
     }

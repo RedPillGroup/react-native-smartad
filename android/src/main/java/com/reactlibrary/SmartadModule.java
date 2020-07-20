@@ -80,9 +80,12 @@ public class SmartadModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void loadRewardedVideoAd() {
+    public void loadRewardedVideoAd(@Nullable String securedTransactionToken) {
         if (mRewardedVideoManager != null) {
-            mRewardedVideoManager.loadRewardedVideo();
+            if (securedTransactionToken == null)
+                mRewardedVideoManager.loadRewardedVideo();
+            else
+                mRewardedVideoManager.loadRewardedVideo(securedTransactionToken);
         } else {
             sendEvent("smartAdRewardedVideoAdFailedToLoad", null);
         }
@@ -156,6 +159,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
                     WritableMap params = Arguments.createMap();
                     params.putDouble("amount", reward.getAmount());
                     params.putString("currency", reward.getCurrency());
+                    params.putString("securedToken", reward.getSecuredTransactionToken());
                     sendEvent("smartAdRewardReceived", params);
                 } else {
                     sendEvent("smartAdRewardNotReceived", null);
