@@ -85,7 +85,7 @@ dependencies {
 
     // Add Smart Display SDK
 	implementation 'com.smartadserver.android:smart-display-sdk:7.6.1@aar'
-	implementation 'com.smartadserver.android:smart-core-sdk:7.6.1@aar'
+	implementation 'com.smartadserver.android:smart-core-sdk:7.6.0@aar'
 
 	// Add dependencies required by Smart Display SDK
 	implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'
