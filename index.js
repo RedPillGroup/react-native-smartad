@@ -62,7 +62,7 @@ const removeAllListeners = () => {
   SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEndCardDisplayed');
 }
 
-const loadAndShowRewardedVideo = () => {
+const loadAndShowRewardedVideo = (securedTransactionToken=null) => {
   const showAndDelete = () => {
     RNSmartAdRewardedVideo.showRewardedVideo();
     removeEventListener('smartAdRewardedVideoAdLoaded', showAndDelete);
@@ -75,7 +75,7 @@ const loadAndShowRewardedVideo = () => {
 
   addEventListener('smartAdRewardedVideoAdLoaded', showAndDelete);
   addEventListener('smartAdRewardedVideoAdFailedToLoad', errorDelete);
-  RNSmartAdRewardedVideo.loadRewardedVideoAd();
+  RNSmartAdRewardedVideo.loadRewardedVideoAd(securedTransactionToken);
 }
 
 module.exports = {
