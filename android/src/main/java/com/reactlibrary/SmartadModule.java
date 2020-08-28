@@ -188,12 +188,16 @@ public class SmartadModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     protected void reset() {
-        mRewardedVideoManager.reset();
+        if (mRewardedVideoManager != null) {
+            mRewardedVideoManager.reset();
+        }
     }
 
     @ReactMethod
     protected void onDestroy() {
-        mRewardedVideoManager.onDestroy();
+        if (mRewardedVideoManager != null) {
+            mRewardedVideoManager.onDestroy();
+        }
     }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
