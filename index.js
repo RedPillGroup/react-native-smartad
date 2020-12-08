@@ -16,26 +16,19 @@ const eventHandlers = {
   smartAdRewardedVideoEvent: new Map(),
   smartAdRewardedVideoEndCardDisplayed: new Map(),
   kSmartAdVignette:new Map(),
+  smartAdBannerAdLoaded:new Map(),
+  smartAdBannerFailedToLoad:new Map(),
+  smartAdBannerAdClicked:new Map(),
+  smartAdBannerAdClosed:new Map(),
+  smartAdBannerAdVideoEvent:new Map(),
+  smartAdBannerAdFailedToLoad: new Map(),
 }
 
 const addEventListener = (type, handler) => {
-  switch (type) {
-    case 'smartAdRewardedVideoNotReady':
-    case 'smartAdRewardedVideoAdLoaded':
-    case 'smartAdRewardedVideoAdFailedToLoad':
-    case 'smartAdRewardedVideoAdShown':
-    case 'smartAdVideoAdFailedToShow':
-    case 'smartAdRewardedVideoAdClosed':
-    case 'smartAdRewardReceived':
-    case 'smartAdRewardNotReceived':
-    case 'smartAdRewardedVideoAdClicked':
-    case 'smartAdRewardedVideoEvent':
-    case 'kSmartAdVignette':
-    case 'smartAdRewardedVideoEndCardDisplayed':
-      eventHandlers[type].set(handler, SmartAdRewardedVideoEventEmitter.addListener(type, handler));
-      break;
-    default:
-      console.log(`Event with type ${type} does not exist.`);
+  if(Object.keys(eventHandlers).includes(type)){
+    eventHandlers[type].set(handler, SmartAdRewardedVideoEventEmitter.addListener(type, handler));
+  } else {
+    console.log(`Event with type ${type} does not exist.`);
   }
 };
 
@@ -48,18 +41,9 @@ const removeEventListener = (type, handler) => {
 };
 
 const removeAllListeners = () => {
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoNotReady');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdLoaded');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdFailedToLoad');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdShown');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdVideoAdFailedToShow');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdClosed');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardReceived');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardNotReceived');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoAdClicked');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEvent');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('kSmartAdVignette');
-  SmartAdRewardedVideoEventEmitter.removeAllListeners('smartAdRewardedVideoEndCardDisplayed');
+  for(const key in eventHandlers) {
+    SmartAdRewardedVideoEventEmitter.removeAllListeners(key);  
+  }
 }
 
 const loadAndShowRewardedVideo = (securedTransactionToken=null) => {
@@ -80,9 +64,12 @@ const loadAndShowRewardedVideo = (securedTransactionToken=null) => {
 
 module.exports = {
   ...RNSmartAdRewardedVideo,
+  initialize: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initialize(siteId, pageId, formatId, target),
   initializeRewardedVideo: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeRewardedVideo(siteId, pageId, formatId, target),
+  initializeBanner: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeBanner(siteId, pageId, formatId, target),
   showRewardedVideo: () => RNSmartAdRewardedVideo.showRewardedVideo(),
   loadRewardedVideo: (securedTransactionToken=null) => RNSmartAdRewardedVideo.loadRewardedVideoAd(securedTransactionToken),
+  loadBannerAd:() => RNSmartAdRewardedVideo.loadBannerAd(),
   loadAndShowRewardedVideo,
   addEventListener,
   removeEventListener,

@@ -53,9 +53,16 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
+    google()
+    jcenter()
+
     // ref: https://www.baeldung.com/maven-local-repository
     mavenLocal()
     maven {
@@ -73,10 +80,6 @@ repositories {
     maven {
         url 'http://developer.huawei.com/repo/'
     }
-
-    google()
-    jcenter()
-
 }
 
 dependencies {
@@ -84,18 +87,7 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 
     // Add Smart Display SDK
-	implementation 'com.smartadserver.android:smart-display-sdk:7.6.1@aar'
-	implementation 'com.smartadserver.android:smart-core-sdk:7.6.0@aar'
-
-	// Add dependencies required by Smart Display SDK
-	implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'
-	implementation 'com.google.android.gms:play-services-location:16.0.0'
-	implementation 'com.squareup.okhttp3:okhttp:3.12.0'
-	implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
-
-	// Huawei services dependencies
-	implementation 'com.huawei.hms:ads-identifier:3.4.28.305'
-	implementation 'com.huawei.hms:location:4.0.2.300'
+	implementation 'com.smartadserver.android:smart-display-sdk:7.8.0'
 }
 
 def configureReactNativePom(def pom) {

@@ -45,6 +45,8 @@ public class SmartadModule extends ReactContextBaseJavaModule {
      SASAdPlacement                                mRewardedVideoPlacement;
      SASRewardedVideoManager                       mRewardedVideoManager;
      SASRewardedVideoManager.RewardedVideoListener mRewardedVideoListener;
+
+     SASBannerView                                 mBannerView;
  
     /****************************
      * Members declarations
@@ -62,15 +64,19 @@ public class SmartadModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initializeRewardedVideo(final @NonNull int SITE_ID, final @NonNull String PAGE_ID, final @NonNull int FORMAT_ID, final @Nullable String TARGET) {
+    public void initialize(final @NonNull int SITE_ID, final @NonNull String PAGE_ID, final @NonNull int FORMAT_ID, final @Nullable String TARGET) {
         // Enables output to log.
+        SASConfiguration.getSharedInstance().configure(reactContext, SITE_ID);
         SASConfiguration.getSharedInstance().setLoggingEnabled(true);
+    }
+
+    @ReactMethod
+    public void initializeRewardedVideo(final @NonNull int SITE_ID, final @NonNull String PAGE_ID, final @NonNull int FORMAT_ID, final @Nullable String TARGET) {
 
         // Initializes the SmartAdServer on main thread
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                SASConfiguration.getSharedInstance().configure(reactContext, SITE_ID, "https://mobile.smartadserver.com");
                 mRewardedVideoPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
                 mRewardedVideoManager = new SASRewardedVideoManager(reactContext, mRewardedVideoPlacement);
                 initRewardVideoListener();
@@ -78,6 +84,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
             }
         });
     }
+
 
     @ReactMethod
     public void loadRewardedVideoAd(@Nullable String securedTransactionToken) {
@@ -100,7 +107,6 @@ public class SmartadModule extends ReactContextBaseJavaModule {
             sendEvent("smartAdRewardedVideoNotReady", null);
         }
     }
-
     private void initRewardVideoListener() {
         this.mRewardedVideoListener = new SASRewardedVideoManager.RewardedVideoListener() {
             @Override
@@ -198,9 +204,91 @@ public class SmartadModule extends ReactContextBaseJavaModule {
         if (mRewardedVideoManager != null) {
             mRewardedVideoManager.onDestroy();
         }
+        if(mBannerView != null) {
+            mBannerView.onDestroy();
+        }
+        super.onDestroy();
     }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
         getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+    }
+
+    // *************** BANNER VIEW *************** //
+    
+    @ReactMethod
+    public void initializeBanner(final @NonNull int SITE_ID, final @NonNull String PAGE_ID, final @NonNull int FORMAT_ID, final @Nullable String TARGET) {
+        // Initializes the SmartAdServer on main thread
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                mRewardedVideoPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
+                mBannerView = new SASBannerView(reactContext);
+                initializeBannerListener();
+            }
+        });
+    }
+
+    private void initializeBannerListener() {
+        SASBannerView.BannerListener bannerListener = new SASBannerView.BannerListener() {
+            @Override
+            public void onBannerAdLoaded(SASBannerView bannerView, SASAdElement adElement) {
+                Log.i("Sample", "Banner loading completed");
+                sendEvent("smartAdBannerAdLoaded",null);
+            }
+
+            @Override
+            public void onBannerAdFailedToLoad(SASBannerView bannerView, Exception e) {
+                Log.i("Sample", "Banner loading failed: " + e.getMessage());
+                sendEvent("smartAdBannerFailedToLoad",null);
+            }
+
+            @Override
+            public void onBannerAdClicked(SASBannerView bannerView) {
+                Log.i("Sample", "Banner was clicked");
+                sendEvent("smartAdBannerAdClicked",null);
+            }
+
+            @Override
+            public void onBannerAdExpanded(SASBannerView bannerView) {
+                Log.i("Sample", "Banner was expanded");
+                // sendEvent("smartAdBannerAdExpanded",null);
+            }
+
+            @Override
+            public void onBannerAdCollapsed(SASBannerView bannerView) {
+                Log.i("Sample", "Banner was collapsed");
+                // sendEvent("smartAdBannerAdCollapsed",null);
+            }
+
+            @Override
+            public void onBannerAdResized(SASBannerView bannerView) {
+                Log.i("Sample", "Banner was resized");
+                // sendEvent("smartAdBannerAdResized",null);
+            }
+
+            @Override
+            public void onBannerAdClosed(SASBannerView bannerView) {
+                Log.i("Sample", "Banner was closed");
+                sendEvent("smartAdBannerAdClosed",null);
+            }
+
+            @Override
+            public void onBannerAdVideoEvent(SASBannerView bannerView, int videoEvent) {
+                Log.i("Sample", "Video event " + videoEvent + " was triggered on Banner");
+                sendEvent("smartAdBannerAdVideoEvent",null);
+            }
+        };
+
+        mBannerView.setBannerListener(bannerListener);
+    }
+
+    @ReactMethod
+    public void loadBannerAd() {
+        if (mBannerView != null) {
+            mBannerView.loadAd(mRewardedVideoPlacement);
+        } else {
+            sendEvent("smartAdBannerAdFailedToLoad", null);
+        }
     }
 }
