@@ -16,6 +16,7 @@ import com.smartadserver.android.library.model.SASAdStatus;
 import com.smartadserver.android.library.model.SASAdElement;
 import com.smartadserver.android.library.model.SASAdPlacement;
 import com.smartadserver.android.library.model.SASNativeVideoAdElement;
+import com.smartadserver.android.library.ui.SASBannerView;
 import com.smartadserver.android.library.util.SASConfiguration;
 import com.smartadserver.android.library.rewarded.SASRewardedVideoManager;
 
@@ -46,7 +47,8 @@ public class SmartadModule extends ReactContextBaseJavaModule {
      SASRewardedVideoManager                       mRewardedVideoManager;
      SASRewardedVideoManager.RewardedVideoListener mRewardedVideoListener;
 
-     SASBannerView                                 mBannerView;
+     SASAdPlacement                                mBannerPlacement;
+     SASBannerView mBannerView;
  
     /****************************
      * Members declarations
@@ -64,7 +66,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initialize(final @NonNull int SITE_ID, final @NonNull String PAGE_ID, final @NonNull int FORMAT_ID, final @Nullable String TARGET) {
+    public void initialize(final @NonNull int SITE_ID) {
         // Enables output to log.
         SASConfiguration.getSharedInstance().configure(reactContext, SITE_ID);
         SASConfiguration.getSharedInstance().setLoggingEnabled(true);
@@ -207,7 +209,6 @@ public class SmartadModule extends ReactContextBaseJavaModule {
         if(mBannerView != null) {
             mBannerView.onDestroy();
         }
-        super.onDestroy();
     }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
@@ -222,7 +223,8 @@ public class SmartadModule extends ReactContextBaseJavaModule {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                mRewardedVideoPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
+                mBannerPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
+                Log.i("Sample", "Init banner");
                 mBannerView = new SASBannerView(reactContext);
                 initializeBannerListener();
             }
@@ -286,7 +288,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void loadBannerAd() {
         if (mBannerView != null) {
-            mBannerView.loadAd(mRewardedVideoPlacement);
+            mBannerView.loadAd(mBannerPlacement);
         } else {
             sendEvent("smartAdBannerAdFailedToLoad", null);
         }

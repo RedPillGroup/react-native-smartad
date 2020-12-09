@@ -21,7 +21,6 @@ const eventHandlers = {
   smartAdBannerAdClicked:new Map(),
   smartAdBannerAdClosed:new Map(),
   smartAdBannerAdVideoEvent:new Map(),
-  smartAdBannerAdFailedToLoad: new Map(),
 }
 
 const addEventListener = (type, handler) => {
@@ -64,7 +63,7 @@ const loadAndShowRewardedVideo = (securedTransactionToken=null) => {
 
 module.exports = {
   ...RNSmartAdRewardedVideo,
-  initialize: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initialize(siteId, pageId, formatId, target),
+  initialize: (siteId) => RNSmartAdRewardedVideo.initialize(siteId),
   initializeRewardedVideo: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeRewardedVideo(siteId, pageId, formatId, target),
   initializeBanner: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeBanner(siteId, pageId, formatId, target),
   showRewardedVideo: () => RNSmartAdRewardedVideo.showRewardedVideo(),
