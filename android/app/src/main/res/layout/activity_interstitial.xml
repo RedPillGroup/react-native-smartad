@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:paddingTop="15dp">
+
+    <Button
+        android:id="@+id/loadAd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_margin="40dp"
+        android:text="@string/activity_interstitial_load_btn" />
+
+    <Button
+        android:id="@+id/showAd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_margin="40dp"
+        android:text="@string/activity_interstitial_show_btn" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingEnd="40dp"
+        android:paddingStart="40dp"
+        android:text="@string/activity_interstitial_instructions" />
+
+</LinearLayout>
+

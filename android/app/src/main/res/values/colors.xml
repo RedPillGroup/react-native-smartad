@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#75D1B4</color>
+    <color name="colorPrimaryDark">#75D1B4</color>
+    <color name="colorAccent">#FF0000</color>
+    <color name="actionBarBackground">#75D1B4</color>
+    <color name="listBackground">#e6e6e6</color>#FFFFFF
+    <color name="mainActivityBackground">#FFFFFF</color>
+
+    <color name="colorRatingProgress">#FFFF20</color>
+    <color name="colorRatingForeground">#00FF00</color>
+    <color name="colorRatingBackground">#FF0000</color>
+    <color name="colorTextRetry">#FFFFFF</color>
+    <color name="colorLoaderBackground">#FFFFFF</color>
+</resources>

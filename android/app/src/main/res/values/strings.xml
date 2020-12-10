@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Smart Sample</string>
+
+    <!-- Main Activity -->
+    <string name="title_activity_main">Smart Sample</string>
+    <string name="title_activity_main_short">SAS Sample</string>
+    <string-array name="activity_main_implementations_array">
+        <item>Banner</item>
+        <item>Banner (in-app bidding)</item>
+        <item>Interstitial</item>
+        <item>Interstitial (in-app bidding)</item>
+        <item>Rewarded Video</item>
+        <item>Multiple Banners and Medias in news feed</item>
+        <item>Parallax in CoordinatorLayout</item>
+        <item>Native Ad in news feed</item>
+        <item>Native Ad with Media in news feed</item>
+    </string-array>
+    <string name="activity_main_headerText">CHOOSE A SAMPLE :</string>
+    <string name="activity_main_footerText">This sample demonstrates how to implement the Smart AdServer SDK in Android applications.</string>
+
+    <!-- Banner Activity -->
+    <string name="title_activity_banner">Banner</string>
+    <string name="activity_banner_refresh_btn">Reload</string>
+    <string name="activity_banner_instructions">Simple banner integration. See implementation in BannerActivity.</string>
+
+    <!-- Interstitial Activity -->
+    <string name="title_activity_interstitial">Interstitial</string>
+    <string name="activity_interstitial_load_btn">LOAD INTERSTITIAL AD</string>
+    <string name="activity_interstitial_show_btn">SHOW INTERSTITIAL AD</string>
+    <string name="activity_interstitial_instructions">Simple interstitial integration. Click the load button to load an interstitial ad, then click the show button to display it. See implementation in InterstitialActivity.</string>
+
+    <!-- Rewarded Video Activity -->
+    <string name="title_activity_rewarded_video">Rewarded Video</string>
+    <string name="activity_rewardedvideo_load_btn">LOAD AD</string>
+    <string name="activity_rewardedvideo_show_btn">SHOW AD</string>
+    <string name="activity_rewardedvideo_instructions">Simple rewarded video integration. Click the load button to load a rewarded video ad, then click the show button to display it. See implementation in RewardedVideoActivity.</string>
+
+    <!-- Recycler Activity -->
+    <string name="title_activity_recycler">Multiple banners in news feed</string>
+
+    <!-- CoordinatorLayout Activity -->
+    <string name="title_activity_coordinator_layout">Parallax banner in CoordinatorLayout</string>
+
+    <!-- Native Ads Activity -->
+    <string name="title_activity_native">Native Ad in news feed</string>
+
+    <!-- InApp Bidding Banner Activity -->
+    <string name="title_activity_inapp_bidding_banner">Banner In-App Bidding</string>
+    <string name="activity_inapp_bidding_banner_instructions">Banner (click on \'Load\' to get a bidding ad, click on \'Show\' to load it into the banner view)</string>
+    <string name="activity_inapp_bidding_banner_load">Load Bidding Ad</string>
+    <string name="activity_inapp_bidding_banner_show">Load Banner</string>
+
+    <!-- InApp Bidding Banner Activity -->
+    <string name="title_activity_inapp_bidding_interstitial">Interstitial In-App Bidding</string>
+    <string name="activity_inapp_bidding_interstitial_instructions">Interstitial (click on \'Load\' to get a bidding ad, click on \'Show\' to load it into the interstitial view)</string>
+    <string name="activity_inapp_bidding_interstitial_load">Load Bidding Ad</string>
+    <string name="activity_inapp_bidding_interstitial_show">Load/Show Interstitial</string>
+
+</resources>
