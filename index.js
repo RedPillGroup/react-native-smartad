@@ -18,34 +18,34 @@ const eventHandlers = {
   // smartAdRewardedVideoEvent: new Map(),
   // smartAdRewardedVideoEndCardDisplayed: new Map(),
   // kSmartAdVignette:new Map(),
-  smartAdBannerAdLoaded:new Map(),
-  smartAdBannerFailedToLoad:new Map(),
-  smartAdBannerAdClicked:new Map(),
-  smartAdBannerAdClosed:new Map(),
-  smartAdBannerAdVideoEvent:new Map(),
+  // smartAdBannerAdLoaded:new Map(),
+  // smartAdBannerFailedToLoad:new Map(),
+  // smartAdBannerAdClicked:new Map(),
+  // smartAdBannerAdClosed:new Map(),
+  // smartAdBannerAdVideoEvent:new Map(),
 }
 
-const addEventListener = (type, handler) => {
-  if(Object.keys(eventHandlers).includes(type)){
-    eventHandlers[type].set(handler, SmartAdBannerEventEmitter.addListener(type, handler));
-  } else {
-    console.log(`Event with type ${type} does not exist.`);
-  }
-};
+// const addEventListener = (type, handler) => {
+//   if(Object.keys(eventHandlers).includes(type)){
+//     eventHandlers[type].set(handler, SmartAdBannerEventEmitter.addListener(type, handler));
+//   } else {
+//     console.log(`Event with type ${type} does not exist.`);
+//   }
+// };
 
-const removeEventListener = (type, handler) => {
-  if (!eventHandlers[type].has(handler)) {
-    return;
-  }
-  eventHandlers[type].get(handler).remove();
-  eventHandlers[type].delete(handler);
-};
+// const removeEventListener = (type, handler) => {
+//   if (!eventHandlers[type].has(handler)) {
+//     return;
+//   }
+//   eventHandlers[type].get(handler).remove();
+//   eventHandlers[type].delete(handler);
+// };
 
-const removeAllListeners = () => {
-  for(const key in eventHandlers) {
-    SmartAdRewardedVideoEventEmitter.removeAllListeners(key);  
-  }
-}
+// const removeAllListeners = () => {
+//   for(const key in eventHandlers) {
+//     SmartAdBannerEventEmitter.removeAllListeners(key);  
+//   }
+// }
 
 // const loadAndShowRewardedVideo = (securedTransactionToken=null) => {
 //   const showAndDelete = () => {
@@ -72,7 +72,7 @@ module.exports = {
   // loadRewardedVideo: (securedTransactionToken=null) => RNSmartAdRewardedVideo.loadRewardedVideoAd(securedTransactionToken),
   loadBannerAd:(siteId, pageId, formatId, target) => RNBanner.loadBannerAd(siteId, pageId, formatId, target),
   // loadAndShowRewardedVideo,
-  addEventListener,
-  removeEventListener,
+  // addEventListener,
+  // removeEventListener,
   removeAllListeners
 };
