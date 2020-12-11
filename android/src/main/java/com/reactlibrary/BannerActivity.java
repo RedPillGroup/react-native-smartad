@@ -5,7 +5,10 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import android.os.Handler;
+import android.os.Looper;
 import com.smartadserver.android.library.model.SASAdElement;
 import com.smartadserver.android.library.model.SASAdPlacement;
 import com.smartadserver.android.library.ui.SASBannerView;
@@ -15,13 +18,13 @@ import com.smartadserver.android.library.util.SASConfiguration;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-
+import com.facebook.react.bridge.ReactMethod;
 /**
  * Simple activity featuring a banner ad.
  */
 
 public class BannerActivity extends ReactContextBaseJavaModule {
-
+    private final ReactApplicationContext reactContext;
     /*****************************************
      * Ad Constants
      *****************************************/
@@ -52,26 +55,27 @@ public class BannerActivity extends ReactContextBaseJavaModule {
     /**
      * performs Activity initialization after creation
      */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    // @Override
+    // protected void onCreate(Bundle savedInstanceState) {
+    //     super.onCreate(savedInstanceState);
 
-        /*****************************************
-         * now perform Ad related code here
-         *****************************************/
+    //     /*****************************************
+    //      * now perform Ad related code here
+    //      *****************************************/
 
-        // Enable output to Android Logcat (optional)
-        SASConfiguration.getSharedInstance().setLoggingEnabled(true);
+    //     // Enable output to Android Logcat (optional)
+    //     SASConfiguration.getSharedInstance().setLoggingEnabled(true);
 
-        // Enable debugging in Webview if available (optional)
-        WebView.setWebContentsDebuggingEnabled(true);
+    //     // Enable debugging in Webview if available (optional)
+    //     WebView.setWebContentsDebuggingEnabled(true);
 
-    }
+    // }
     @ReactMethod
     public void initialize(final @NonNull int SITE_ID) {
         // Enables output to log.
         SASConfiguration.getSharedInstance().configure(reactContext, SITE_ID);
         SASConfiguration.getSharedInstance().setLoggingEnabled(true);
+        WebView.setWebContentsDebuggingEnabled(true);
     }
 
     @ReactMethod
@@ -88,11 +92,9 @@ public class BannerActivity extends ReactContextBaseJavaModule {
     /**
      * Overriden to clean up SASAdView instances. This must be done to avoid IntentReceiver leak.
      */
-    @Override
     @ReactMethod
     protected void onDestroy() {
         mBannerView.onDestroy();
-        super.onDestroy();
     }
 
     /**
@@ -102,9 +104,9 @@ public class BannerActivity extends ReactContextBaseJavaModule {
 
         // Add a loader view on the banner. This view covers the banner placement, to indicate progress, whenever the banner is loading an ad.
         // This is optional
-        View loader = new SASRotatingImageLoader(this);
-        loader.setBackgroundColor(getResources().getColor(R.color.colorLoaderBackground));
-        mBannerView.setLoaderView(loader);
+        // View loader = new SASRotatingImageLoader(this);
+        // loader.setBackgroundColor(getResources().getColor(R.color.colorLoaderBackground));
+        // mBannerView.setLoaderView(loader);
 
         bannerListener = new SASBannerView.BannerListener() {
             @Override

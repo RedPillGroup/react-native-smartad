@@ -13,10 +13,11 @@ import com.facebook.react.bridge.JavaScriptModule;
 public class SmartadPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        List<NativeModule> SmartadModule = new List<NativeModule>();
+        // List<NativeModule> SmartadModule = new List<NativeModule>();
         // SmartadModule.add(new RewardVideo(reactContext));
-        SmartadModule.add(new Banner(reactContext));
-        return SmartadModule;
+        // SmartadModule.add(new Banner(reactContext));
+        // return SmartadModule;
+        return Arrays.<NativeModule>asList(new Banner(reactContext));
     }
 
     @Override
