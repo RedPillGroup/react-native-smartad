@@ -20,7 +20,7 @@ const eventHandlers = {
 
 const addEventListener = (type, handler) => {
   if(Object.keys(eventHandlers).includes(type)){
-    eventHandlers[type].set(handler, SmartAdBannerEventEmitter.addListener(type, handler));
+    eventHandlers[type].set(handler, SmartAdRewardedVideoEventEmitter.addListener(type, handler));
   } else {
     console.log(`Event with type ${type} does not exist.`);
   }
@@ -36,7 +36,7 @@ const removeEventListener = (type, handler) => {
 
 const removeAllListeners = () => {
   for(const key in eventHandlers) {
-    SmartAdBannerEventEmitter.removeAllListeners(key);  
+    SmartAdRewardedVideoEventEmitter.removeAllListeners(key);  
   }
 }
 
