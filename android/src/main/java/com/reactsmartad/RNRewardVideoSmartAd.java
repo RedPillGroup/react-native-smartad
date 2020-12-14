@@ -59,7 +59,7 @@ public class RNRewardVideoSmartAd extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "Smartad";
+        return "RewardVideo";
     }
 
     @ReactMethod
