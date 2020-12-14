@@ -58,7 +58,7 @@ const loadAndShowRewardedVideo = (securedTransactionToken=null) => {
 
 module.exports = {
   ...RNSmartAdRewardedVideo,
-  initialize: (siteId) => RNBanner.initialize(siteId),
+  initialize: (siteId) => RNSmartAdRewardedVideo.initialize(siteId),
   initializeRewardedVideo: (siteId, pageId, formatId, target) => RNSmartAdRewardedVideo.initializeRewardedVideo(siteId, pageId, formatId, target),
   showRewardedVideo: () => RNSmartAdRewardedVideo.showRewardedVideo(),
   loadRewardedVideo: (securedTransactionToken=null) => RNSmartAdRewardedVideo.loadRewardedVideoAd(securedTransactionToken),
