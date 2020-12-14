@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.reactsmartad;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-public class SmartadModule extends ReactContextBaseJavaModule {
+public class RNRewardVideoSmartAd extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
@@ -37,7 +37,7 @@ public class SmartadModule extends ReactContextBaseJavaModule {
      * Ad Constants
      ****************************/
 
-     private final static String TAG               = "SmartadModule";
+     private final static String TAG               = "RNRewardVideoSmartAd";
 
     /****************************
      * Ad Variables
@@ -46,9 +46,6 @@ public class SmartadModule extends ReactContextBaseJavaModule {
      SASAdPlacement                                mRewardedVideoPlacement;
      SASRewardedVideoManager                       mRewardedVideoManager;
      SASRewardedVideoManager.RewardedVideoListener mRewardedVideoListener;
-
-     SASAdPlacement                                mBannerPlacement;
-     SASBannerView mBannerView;
  
     /****************************
      * Members declarations
@@ -206,91 +203,10 @@ public class SmartadModule extends ReactContextBaseJavaModule {
         if (mRewardedVideoManager != null) {
             mRewardedVideoManager.onDestroy();
         }
-        if(mBannerView != null) {
-            mBannerView.onDestroy();
-        }
     }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
         getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
     }
 
-    // *************** BANNER VIEW *************** //
-    
-    @ReactMethod
-    public void initializeBanner(final @NonNull int SITE_ID, final @NonNull String PAGE_ID, final @NonNull int FORMAT_ID, final @Nullable String TARGET) {
-        // Initializes the SmartAdServer on main thread
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                mBannerPlacement = new SASAdPlacement(SITE_ID, PAGE_ID, FORMAT_ID, TARGET);
-                Log.i("Sample", "Init banner");
-                mBannerView = new SASBannerView(reactContext);
-                initializeBannerListener();
-            }
-        });
-    }
-
-    private void initializeBannerListener() {
-        SASBannerView.BannerListener bannerListener = new SASBannerView.BannerListener() {
-            @Override
-            public void onBannerAdLoaded(SASBannerView bannerView, SASAdElement adElement) {
-                Log.i("Sample", "Banner loading completed");
-                sendEvent("smartAdBannerAdLoaded",null);
-            }
-
-            @Override
-            public void onBannerAdFailedToLoad(SASBannerView bannerView, Exception e) {
-                Log.i("Sample", "Banner loading failed: " + e.getMessage());
-                sendEvent("smartAdBannerFailedToLoad",null);
-            }
-
-            @Override
-            public void onBannerAdClicked(SASBannerView bannerView) {
-                Log.i("Sample", "Banner was clicked");
-                sendEvent("smartAdBannerAdClicked",null);
-            }
-
-            @Override
-            public void onBannerAdExpanded(SASBannerView bannerView) {
-                Log.i("Sample", "Banner was expanded");
-                // sendEvent("smartAdBannerAdExpanded",null);
-            }
-
-            @Override
-            public void onBannerAdCollapsed(SASBannerView bannerView) {
-                Log.i("Sample", "Banner was collapsed");
-                // sendEvent("smartAdBannerAdCollapsed",null);
-            }
-
-            @Override
-            public void onBannerAdResized(SASBannerView bannerView) {
-                Log.i("Sample", "Banner was resized");
-                // sendEvent("smartAdBannerAdResized",null);
-            }
-
-            @Override
-            public void onBannerAdClosed(SASBannerView bannerView) {
-                Log.i("Sample", "Banner was closed");
-                sendEvent("smartAdBannerAdClosed",null);
-            }
-
-            @Override
-            public void onBannerAdVideoEvent(SASBannerView bannerView, int videoEvent) {
-                Log.i("Sample", "Video event " + videoEvent + " was triggered on Banner");
-                sendEvent("smartAdBannerAdVideoEvent",null);
-            }
-        };
-
-        mBannerView.setBannerListener(bannerListener);
-    }
-
-    @ReactMethod
-    public void loadBannerAd() {
-        if (mBannerView != null) {
-            mBannerView.loadAd(mBannerPlacement);
-        } else {
-            sendEvent("smartAdBannerAdFailedToLoad", null);
-        }
-    }
 }
