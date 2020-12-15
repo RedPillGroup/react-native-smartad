@@ -97,7 +97,7 @@
 			);
 			dependencies = (
 			);
-			name = Smartad;
+			name = RewardVideo;
 			productName = RCTDataManager;
 			productReference = 134814201AA4EA6300B7C361 /* libSmartad.a */;
 			productType = "com.apple.product-type.library.static";
@@ -275,7 +275,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Smartad;
+				PRODUCT_NAME = RewardVideo;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -292,7 +292,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Smartad;
+				PRODUCT_NAME = RewardVideo;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

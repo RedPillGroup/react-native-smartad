@@ -1,4 +1,4 @@
-#import "Smartad.h"
+#import "RewardVideo.h"
 #import "RCTUtils.h"
 
 NSString *const kSmartAdRewardedVideoNotReady = @"smartAdRewardedVideoNotReady";
@@ -17,13 +17,13 @@ NSString *const kSmartAdCustomAdvertiser = @"kSmartAdCustomAdvertiser";
 
 #define kBaseURL @"https://mobile.smartadserver.com"
 
-@interface Smartad () <SASRewardedVideoManagerDelegate>
+@interface RewardVideo () <SASRewardedVideoManagerDelegate>
 
 @property SASRewardedVideoManager *rewardedVideoManager;
 @property (nonatomic, strong) SASNativeAd *nativeAd;
 @end
 
-@implementation Smartad {
+@implementation RewardVideo {
     RCTResponseSenderBlock _requestRewardedVideoCallback;
 }
 
