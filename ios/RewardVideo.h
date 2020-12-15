@@ -13,6 +13,6 @@
 
 #import <SASDisplayKit/SASDisplayKit.h>
 
-@interface Smartad : RCTEventEmitter <RCTBridgeModule, SASRewardedVideoManagerDelegate>
+@interface RewardVideo : RCTEventEmitter <RCTBridgeModule, SASRewardedVideoManagerDelegate>
 
 @end
