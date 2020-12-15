@@ -16,9 +16,3 @@
 @interface Smartad : RCTEventEmitter <RCTBridgeModule, SASRewardedVideoManagerDelegate>
 
 @end
-
-@interface SASNativeVideoAd : SASAd;
-
-@property (nonatomic, retain) NSURL *posterImageUrl;
-
-@end
