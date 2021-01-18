@@ -1,6 +1,5 @@
-#import "RewardVideo.h"
+#import "Smartad.h"
 #import "RCTUtils.h"
-
 
 NSString *const kSmartAdRewardedVideoNotReady = @"smartAdRewardedVideoNotReady";
 NSString *const kSmartAdRewardedVideoAdLoaded = @"smartAdRewardedVideoAdLoaded";
@@ -18,13 +17,13 @@ NSString *const kSmartAdCustomAdvertiser = @"kSmartAdCustomAdvertiser";
 
 #define kBaseURL @"https://mobile.smartadserver.com"
 
-@interface RewardVideo () <SASRewardedVideoManagerDelegate>
+@interface Smartad () <SASRewardedVideoManagerDelegate>
 
 @property SASRewardedVideoManager *rewardedVideoManager;
 @property (nonatomic, strong) SASNativeAd *nativeAd;
 @end
 
-@implementation RewardVideo {
+@implementation Smartad {
     RCTResponseSenderBlock _requestRewardedVideoCallback;
 }
 
@@ -51,13 +50,11 @@ RCT_EXPORT_MODULE()
         kSmartAdVignette,
         kSmartAdCustomAdvertiser ];
 }
-RCT_EXPORT_METHOD(initialize:(nonnull NSInteger *)kRewardedVideoSiteID)
-{
-    [[SASConfiguration sharedInstance] configureWithSiteId:kRewardedVideoSiteID baseURL:kBaseURL];
-}
 
 RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSInteger *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
-{   
+{
+    [[SASConfiguration sharedInstance] configureWithSiteId:kRewardedVideoSiteID baseURL:kBaseURL];
+    
     SASAdPlacement *placement = [SASAdPlacement
         adPlacementWithSiteId:kRewardedVideoSiteID
                        pageId:kRewardedVideoPageID

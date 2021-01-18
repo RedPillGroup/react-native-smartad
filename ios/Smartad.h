@@ -12,7 +12,13 @@
 #endif
 
 #import <SASDisplayKit/SASDisplayKit.h>
-#import <Foundation/NSString.h>
-@interface RewardVideo : RCTEventEmitter <RCTBridgeModule, SASRewardedVideoManagerDelegate>
+
+@interface Smartad : RCTEventEmitter <RCTBridgeModule, SASRewardedVideoManagerDelegate>
+
+@end
+
+@interface SASNativeVideoAd : SASAd;
+
+@property (nonatomic, retain) NSURL *posterImageUrl;
 
 @end
