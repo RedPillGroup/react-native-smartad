@@ -50,11 +50,13 @@ RCT_EXPORT_MODULE()
         kSmartAdVignette,
         kSmartAdCustomAdvertiser ];
 }
-
-RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSInteger *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
+RCT_EXPORT_METHOD(initialize:(nonnull NSInteger *)kRewardedVideoSiteID)
 {
-    [[SASConfiguration sharedInstance] configureWithSiteId:kRewardedVideoSiteID baseURL:kBaseURL];
+    [[SASConfiguration sharedInstance] configureWithSiteId:kRewardedVideoSiteID];
     
+}
+RCT_EXPORT_METHOD(initializeRewardedVideo:(nonnull NSInteger *)kRewardedVideoSiteID kRewardedVideoPageID:(nonnull NSInteger *)kRewardedVideoPageID kRewardedVideoFormatID:(nonnull NSInteger *)kRewardedVideoFormatID kRewardedVideoKeywordTargeting:(nullable NSString *)kRewardedVideoKeywordTargeting)
+{   
     SASAdPlacement *placement = [SASAdPlacement
         adPlacementWithSiteId:kRewardedVideoSiteID
                        pageId:kRewardedVideoPageID
