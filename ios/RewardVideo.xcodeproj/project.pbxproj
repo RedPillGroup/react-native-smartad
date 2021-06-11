@@ -24,7 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libSmartad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSmartad.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		134814201AA4EA6300B7C361 /* libRewardVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRewardVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		167DDDAAA140CAD101AA7339 /* Pods_Smartad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smartad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E5D25DFAA9455521D56ACC6 /* Pods-Smartad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smartad.release.xcconfig"; path = "Target Support Files/Pods-Smartad/Pods-Smartad.release.xcconfig"; sourceTree = "<group>"; };
 		72F139E4B9C6CE28A7B3E1E6 /* Pods-Smartad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smartad.debug.xcconfig"; path = "Target Support Files/Pods-Smartad/Pods-Smartad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libSmartad.a */,
+				134814201AA4EA6300B7C361 /* libRewardVideo.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,16 +77,15 @@
 				72F139E4B9C6CE28A7B3E1E6 /* Pods-Smartad.debug.xcconfig */,
 				3E5D25DFAA9455521D56ACC6 /* Pods-Smartad.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* Smartad */ = {
+		58B511DA1A9E6C8500147676 /* RewardVideo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Smartad" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RewardVideo" */;
 			buildPhases = (
 				4FD70DEC9EDB4967B5575FBC /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
@@ -97,9 +96,9 @@
 			);
 			dependencies = (
 			);
-			name = Smartad;
+			name = RewardVideo;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libSmartad.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libRewardVideo.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -116,11 +115,12 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Smartad" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RewardVideo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -128,7 +128,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* Smartad */,
+				58B511DA1A9E6C8500147676 /* RewardVideo */,
 			);
 		};
 /* End PBXProject section */
@@ -275,7 +275,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Smartad;
+				PRODUCT_NAME = RewardVideo;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -292,7 +292,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Smartad;
+				PRODUCT_NAME = RewardVideo;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -300,7 +300,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Smartad" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RewardVideo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -309,7 +309,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Smartad" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RewardVideo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,

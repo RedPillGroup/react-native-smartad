@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Smartad.xcodeproj">
+      location = "group:/Users/alexandrelacombe/data/Mojo/react-native-smartad/ios/RewardVideo.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -1,6 +1,6 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
 
-const RNSmartAdRewardedVideo = NativeModules.RewardVideo;
+const RNSmartAdRewardedVideo = NativeModules.Smartad;
 const SmartAdRewardedVideoEventEmitter = new NativeEventEmitter(RNSmartAdRewardedVideo);
 
 const eventHandlers = {
