@@ -103,7 +103,7 @@ public class RNRewardVideoSmartAd extends ReactContextBaseJavaModule {
             mRewardedVideoManager.showRewardedVideo();
         } else {
             Log.e(RNRewardVideoSmartAd.TAG, "RewardedVideo is not ready for the current placement.");
-            sendEvent("smartAdRewardedVideoNotReady", null);
+            sendEvent("smartAdVideoAdFailedToShow", null);
         }
     }
     private void initRewardVideoListener() {
