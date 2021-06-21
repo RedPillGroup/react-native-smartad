@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		070156F2C7B805D929BE0AC0 /* Pods_Smartad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 167DDDAAA140CAD101AA7339 /* Pods_Smartad.framework */; };
+		54EEDE882680CED400C38508 /* RNBannerSmartAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EEDE862680CED400C38508 /* RNBannerSmartAd.m */; };
 		B3E7B58A1CC2AC0600A0062D /* Smartad.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* Smartad.m */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,8 @@
 		134814201AA4EA6300B7C361 /* libRewardVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRewardVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		167DDDAAA140CAD101AA7339 /* Pods_Smartad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smartad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E5D25DFAA9455521D56ACC6 /* Pods-Smartad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smartad.release.xcconfig"; path = "Target Support Files/Pods-Smartad/Pods-Smartad.release.xcconfig"; sourceTree = "<group>"; };
+		54EEDE862680CED400C38508 /* RNBannerSmartAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNBannerSmartAd.m; sourceTree = "<group>"; };
+		54EEDE872680CED400C38508 /* RNBannerSmartAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNBannerSmartAd.h; sourceTree = "<group>"; };
 		72F139E4B9C6CE28A7B3E1E6 /* Pods-Smartad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smartad.debug.xcconfig"; path = "Target Support Files/Pods-Smartad/Pods-Smartad.debug.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* Smartad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Smartad.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* Smartad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Smartad.m; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				54EEDE872680CED400C38508 /* RNBannerSmartAd.h */,
+				54EEDE862680CED400C38508 /* RNBannerSmartAd.m */,
 				B3E7B5881CC2AC0600A0062D /* Smartad.h */,
 				B3E7B5891CC2AC0600A0062D /* Smartad.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -163,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54EEDE882680CED400C38508 /* RNBannerSmartAd.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* Smartad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
