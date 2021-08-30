@@ -1,114 +1,63 @@
 #import "RNBannerSmartAd.h"
-#import "RCTUtils.h"
+#import <React/RCTUtils.h>
 #import <React/RCTUIManager.h>
+#import <React/RCTRootView.h>
+#import <React/RCTRootViewDelegate.h>
 
-#define kBannerSiteID          348776
-#define kBannerPageID          1224025
-#define kBannerFormatID        102663
-#define ROOT_VIEW_CONTROLLER (UIApplication.sharedApplication.keyWindow.rootViewController)
-
-@interface RNBannerSmartAd ()
-    @property SASBannerView *banner;
-    @property (nonatomic, strong) UIView *safeAreaBackground;
-    @property (nonatomic, copy) RCTBubblingEventBlock onBannerLoad;
+@interface RNBannerSmartAdManager : RCTViewManager
+@property RNBannerSmartAd *childBanner;
 @end
-@implementation RNBannerSmartAd
+@implementation RNBannerSmartAdManager
 
 #pragma mark - View controller lifecycle
-
 RCT_EXPORT_MODULE()
-
-+ (BOOL)requiresMainQueueSetup
+- (UIView *)view
 {
-    return YES;
+  _childBanner = [[RNBannerSmartAd alloc] init];
+  return _childBanner;
 }
-// Invoke all exported methods from main queue
-- (dispatch_queue_t)methodQueue
-{
-    return dispatch_get_main_queue();
+RCT_EXPORT_VIEW_PROPERTY(onBannerLoad, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(siteId, NSInteger);
+RCT_EXPORT_VIEW_PROPERTY(pageId, NSInteger);
+RCT_EXPORT_VIEW_PROPERTY(formatId, NSInteger);
+RCT_EXPORT_METHOD(loadBanner:(nonnull NSNumber *)reactTag) {
+  [_childBanner bannerLoadPlacement];
 }
+@end
 
-- (instancetype)init
+@interface RNBannerSmartAd ()
+
+@end
+
+@implementation RNBannerSmartAd
+
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
-    NSLog(@"BannerSmart init view");
-    [[SASConfiguration sharedInstance] configureWithSiteId:kBannerSiteID];
-//    self.safeAreaBackground = [[UIView alloc] init];
-//    [ROOT_VIEW_CONTROLLER.view addSubview: self.safeAreaBackground];
-    self.banner = [[SASBannerView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50) loader:SASLoaderActivityIndicatorStyleWhite];
+    self = [super initWithFrame:frame];
+    self.banner = [[SASBannerView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 50) loader:SASLoaderActivityIndicatorStyleWhite];
     self.banner.delegate = self;
+  [self addSubview:self.banner];
     return self;
 }
 
-- (NSArray<NSString *> *)supportedEvents
-{
-    return @[@"OnBannerAdLoadedEvent"];
-}
-
-RCT_EXPORT_METHOD(loadBanner:(nonnull NSNumber *)reactTag) {
-    NSLog(@"BannerSmart load banner");
-
-    // Create a placement
-    SASAdPlacement *placement = [SASAdPlacement adPlacementWithSiteId:kBannerSiteID pageId:kBannerPageID formatId:kBannerFormatID];
-
-//    NSLog(@"BanneSmart siteId is %zd", self.siteId);
-//    NSLog(@"BanneSmart pageId is %ld", (long)self.pageId);
-    
-    NSLog(@"BannerSmart load placement");
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-        UIView *view = viewRegistry[reactTag];
-        [view addSubview:self.banner];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.banner loadWithPlacement:placement];
-        });
-    }];
-    
-    
-    
-}
 
 #pragma mark - SASBannerView delegate
 
-
-
-//RCT_EXPORT_VIEW_PROPERTY(onBannerLoad, RCTBubblingEventBlock)
+- (void) bannerLoadPlacement {
+  [[SASConfiguration sharedInstance] configureWithSiteId:_siteId];
+  SASAdPlacement *placement = [SASAdPlacement adPlacementWithSiteId:_siteId pageId:_pageId formatId:_formatId];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [_banner loadWithPlacement:placement];
+  });
+}
 - (void)bannerViewDidLoad:(SASBannerView *)bannerView {
     NSLog(@"BannerSmart has been loaded");
-//    bannerView.onBannerLoad(@{@"data":@(YES)});
-//    [self bannerView.sendEventWithName:@"OnBannerAdLoadedEvent" body:nil];
+  if (_onBannerLoad){
+    _onBannerLoad(@{@"data":@(YES)});
+  }
 }
 
 - (void)bannerView:(SASBannerView *)bannerView didFailToLoadWithError:(NSError *)error {
     NSLog(@"BannerSmart has failed to load with error: %@", [error localizedDescription]);
 }
-
-// - (void)setOnBannerLoad:(RCTBubblingEventBlock)onBannerLoad
-// {
-//     NSLog(@"BannerSmaart onBanner Load");
-// }
-//RCT_EXPORT_VIEW_PROPERTY(siteId, NSInteger);
-// RCT_EXPORT_VIEW_PROPERTY(pageId, NSInteger);
-//- (void)setSiteId:(NSInteger)siteId
-//{
-////    self.siteId = siteId;
-//    NSLog(@"BannersiteId is %zd", siteId);
-//}
-//
-//- (void)setPageId:(NSInteger)pageId
-//{
-//    self.pageId = pageId;
-//    NSLog(@"BannerpageId is %zd", pageId);
-//}
-//
-//- (void)setFormatId:(NSInteger)formatId
-//{
-//    self.formatId = formatId;
-//    NSLog(@"BannerformatId is %zd", formatId);
-//}
-
-//- (void)sendReactNativeEventWithName:(NSString *)name body:(NSDictionary<NSString *, id> *)body
-//{
-//    [self sendEventWithName: name body: body];
-//}
-
 @end

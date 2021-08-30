@@ -36,7 +36,7 @@ public class RNBannerSmartAd extends SimpleViewManager<SASBannerView> {
   private RCTEventEmitter mEventEmitter;
 
    public enum Events {
-    EVENT_LOAD_BANNER("onLoadBanner"),
+    EVENT_LOAD_BANNER("onBannerLoad"),
     EVENT_FAIL_TO_LOAD("onFailToLoad");
 
     private final String mName;
