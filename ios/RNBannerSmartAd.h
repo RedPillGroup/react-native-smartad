@@ -34,4 +34,5 @@
 @property (nonatomic, assign) NSInteger pageId;
 @property (nonatomic, assign) NSInteger formatId;
 - (void)bannerLoadPlacement;
+- (void)bannerReload;
 @end

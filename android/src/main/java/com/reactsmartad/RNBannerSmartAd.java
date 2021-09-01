@@ -6,6 +6,7 @@ import android.os.Handler;
 import androidx.annotation.Nullable;
 import java.util.Map;
 
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.common.MapBuilder;
@@ -34,7 +35,7 @@ public class RNBannerSmartAd extends SimpleViewManager<SASBannerView> {
   SASBannerView.BannerListener bannerListener;
   private ThemedReactContext mThemedReactContext;
   private RCTEventEmitter mEventEmitter;
-
+    public int COMMAND_LOAD = 0;
    public enum Events {
     EVENT_LOAD_BANNER("onBannerLoad"),
     EVENT_FAIL_TO_LOAD("onFailToLoad");
@@ -55,6 +56,29 @@ public class RNBannerSmartAd extends SimpleViewManager<SASBannerView> {
   public String getName() {
     return REACT_CLASS;
   }
+    @Nullable
+    @Override
+    public Map<String, Integer> getCommandsMap() {
+        MapBuilder.Builder<String, Integer> builder = MapBuilder.builder();
+
+        builder.put("loadBanner" , COMMAND_LOAD);
+        builder.put("reloadBanner" , COMMAND_LOAD);
+
+        return builder.build();
+    }
+
+    @Override
+    public void receiveCommand(SASBannerView view, String commandId, @Nullable ReadableArray args) {
+        super.receiveCommand(view, commandId, args);
+        switch (commandId) {
+            case "loadBanner":
+                loadBannerAd();
+            break;
+            case "reloadBanner":
+                loadBannerAd();
+            break;
+        }
+    }
   
   @Override
   protected SASBannerView createViewInstance(ThemedReactContext themedReactContext) {
@@ -160,7 +184,6 @@ public class RNBannerSmartAd extends SimpleViewManager<SASBannerView> {
     @ReactProp(name = "target")
     public void setTarget(final SASBannerView view, final String target) {
       this.TARGET = target;
-      loadBannerAd();
     }
 
     private void loadBannerAd() {

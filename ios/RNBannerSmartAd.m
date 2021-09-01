@@ -23,6 +23,9 @@ RCT_EXPORT_VIEW_PROPERTY(formatId, NSInteger);
 RCT_EXPORT_METHOD(loadBanner:(nonnull NSNumber *)reactTag) {
   [_childBanner bannerLoadPlacement];
 }
+RCT_EXPORT_METHOD(reloadBanner:(nonnull NSNumber *)reactTag) {
+  [_childBanner bannerReload];
+}
 @end
 
 @interface RNBannerSmartAd ()
@@ -45,6 +48,12 @@ RCT_EXPORT_METHOD(loadBanner:(nonnull NSNumber *)reactTag) {
 
 - (void) bannerLoadPlacement {
   [[SASConfiguration sharedInstance] configureWithSiteId:_siteId];
+  SASAdPlacement *placement = [SASAdPlacement adPlacementWithSiteId:_siteId pageId:_pageId formatId:_formatId];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [_banner loadWithPlacement:placement];
+  });
+}
+- (void) bannerReload {
   SASAdPlacement *placement = [SASAdPlacement adPlacementWithSiteId:_siteId pageId:_pageId formatId:_formatId];
   dispatch_async(dispatch_get_main_queue(), ^{
     [_banner loadWithPlacement:placement];
